@@ -13,7 +13,7 @@ public class Customer {
 }
 abstract class Customer_Strategy
 {
-    public double dis(Customer a,Customer b)
+    public static double dis(Customer a,Customer b)
     {
         return Math.sqrt((a.x-b.x)*(a.x-b.x) + (a.y-b.y)*(a.y-b.y));//返回两个顾客的欧式距离
     }

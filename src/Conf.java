@@ -32,9 +32,19 @@ public class Conf {
             customers[i].d_time = cin.nextInt();
             customers[i].s_time = cin.nextInt();
         }
-
-        for(int i=1;i<=N;i++)
-            System.out.println(customers[i].x);
+        for(int i=0;i<=N;i++) // 初始化距离矩阵
+            for(int j=i;j<=N;j++)
+            {
+                if(i==j)
+                {
+                    dis_matriax[i][j] = 0;
+                }
+                else
+                {
+                    dis_matriax[i][j] = Customer_Strategy.dis(customers[i],customers[j]);
+                    dis_matriax[j][i] = dis_matriax[i][j];
+                }
+            }
 
 
     }
