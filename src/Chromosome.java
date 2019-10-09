@@ -38,7 +38,7 @@ public class Chromosome {
             time = 0;
             j = i;
             while(true)
-            {\
+            {
                 if(i == j)//行程的开始
                 {
                     time += Math.max(Conf.customers[cur_list.get(j)].r_time,Conf.dis_matriax[0][cur_list.get(j)]);
@@ -55,24 +55,29 @@ public class Chromosome {
                 }
                 if(cost<=Conf.Cap && time <= Conf.customers[0].d_time)//假如满足容量约束和时间约束
                 {
-                    if(V[cur_list.get(j)] < V[cur_list.get(j-1)] + time)
+                    if(V[cur_list.get(j)] > V[cur_list.get(j-1)] + time)
                     {
                         V[cur_list.get(j)] = V[cur_list.get(j-1)] + time;//不断更新当前最短路
+                        P[cur_list.get(j)] = cur_list.get(j-1);
                     }
                 }
                 j++;
-                if(j>Conf.N ||time >= Conf.customers[0].s_time|| cost>=Conf.N )
+                if(j>Conf.N ||time >= Conf.customers[0].d_time || cost>=Conf.N )
                     break;
 
             }
 
 
         }
-        Boolean [] if_arr = new Boolean[Conf.N+1];//是否访问过节点
+        Boolean [] if_arr = new Boolean[Conf.N];//是否访问过节点
         Route route = new Route();
         for(int i=1;i<=Conf.N;i++)
         {
-            if(!if_arr[i])
+
+
+            if(if_arr[i])
+                continue;
+            else
                 {
                     while(true) {
                         int tmp = P[cur_list.get(i)];
