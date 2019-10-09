@@ -31,7 +31,7 @@ public class Chromosome {
         for(int i = 1;i<=Conf.N;i++)//到达的点的最少花费
             V[i] = INF;
         for(int i = 1;i<=Conf.N;i++)
-            P[i] = 0;//最开始所有点都连在depot上
+            P[i] = cur_list.get(i);//最开始所有点都没连上
         for(int i = 1;i<=Conf.N;i++)
         {
             cost  = 0;
@@ -62,7 +62,7 @@ public class Chromosome {
                     }
                 }
                 j++;
-                if(j>Conf.N ||time >= Conf.customers[0].d_time || cost>=Conf.N )
+                if(j>Conf.N ||time >= Conf.customers[0].d_time || cost>=Conf.Cap )
                     break;
 
             }
