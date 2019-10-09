@@ -8,15 +8,22 @@ import java.util.ArrayList;
 public class Solution {
     ArrayList<Route> rou_list;
     double fitness; // 适应度
+
     double getFitness()
     {
-        int value = 0;
-
-        return value;
+        this.fitness = 0;
+        for(Route route:rou_list)
+            this.fitness+=route.value;
+        return this.fitness;
     }
-    Chromosome tochromosome()
+    Chromosome tochromosome()//把solution转化为chromosome
     {
-
+        Chromosome chromosome = new Chromosome();
+        for(Route route :rou_list)
+        {
+            chromosome.cur_list.addAll(route.cus_list);
+        }
+        return chromosome;
     }
 
 }

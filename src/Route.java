@@ -6,19 +6,47 @@ import java.util.ArrayList;
  * @description Route类，每一个route储存了一辆车所访问的顾客
  */
 public class Route {
-    ArrayList<Integer> cus_list;// route列表
-    double dis; // 距离
+    ArrayList<Integer> cus_list = new ArrayList<>();// route列表
+
+    double value;
     boolean if_feasible;
     boolean check()//检查可行性
     {
-
+        return (check_c() && check_t());
     }
     boolean check_c()//容量检查
     {
+        int ans = 0;
+        for(int i:this.cus_list)
+        {
+            ans +=Conf.customers[i].demand;
+        }
+        return ans>Conf.Cap;
 
     }
     boolean check_t()//时间检查
     {
+        int time = 0;
+        for(int i:this.cus_list)
+        {
+            if(time>Conf.customers[i].d_time)
+                return false;
+            double e_time = Math.max(Conf.customers[i].r_time,Conf.dis_matriax[i][i-1]);//获得到达时间
+            time += e_time + Conf.customers[i].s_time;//加上服务时间
+        }
+        return true;
 
+    }
+    double getValue()
+    {
+        this.value = 0;
+        value = Math.max(Conf.customers[this.cus_list.get(0)].r_time,Conf.dis_matriax[0][cus_list.get(0)]);//开始
+        for(int i:this.cus_list.subList(1,cus_list.size()-1))
+        {
+            value = Math.max(Conf.customers[this.cus_list.get(i)].r_time,value+Conf.dis_matriax[i-1][i]);
+            value += Conf.customers[i].s_time;
+        }
+        value = Math.max(Conf.customers[this.cus_list.get(this.cus_list.size()-1)].r_time,value+Conf.dis_matriax[this.cus_list.get(cus_list.size()-2)][this.cus_list.get(cus_list.size()-1)]);
+        return value;
     }
 }

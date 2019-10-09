@@ -11,5 +11,8 @@ public class Main {
     {
         System.out.println("Hello World!");
         Conf.readInstance();
+        Chromosome chromosome = new Chromosome();
+        Solution new_solution = chromosome.toSolution();
+
     }
 }
