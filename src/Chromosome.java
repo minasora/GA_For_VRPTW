@@ -31,7 +31,7 @@ public class Chromosome {
         for(int i = 1;i<=Conf.N;i++)//到达的点的最少花费
             V[i] = INF;
         for(int i = 1;i<=Conf.N;i++)
-            P[i] = cur_list.get(i);//最开始所有点都没连上
+            P[i] = 0;//最开始所有点都没连上
         for(int i = 1;i<=Conf.N;i++)
         {
             cost  = 0;
@@ -58,10 +58,10 @@ public class Chromosome {
                     if(V[cur_list.get(j)] > V[cur_list.get(j-1)] + time)
                     {
                         V[cur_list.get(j)] = V[cur_list.get(j-1)] + time;//不断更新当前最短路
-                        P[cur_list.get(j)] = cur_list.get(j-1);
+                        P[cur_list.get(j)] = i;
                     }
+                    j++;
                 }
-                j++;
                 if(j>Conf.N ||time >= Conf.customers[0].d_time || cost>=Conf.Cap )
                     break;
 
@@ -73,7 +73,6 @@ public class Chromosome {
         Route route = new Route();
         for(int i=1;i<=Conf.N;i++)
         {
-
 
             if(if_arr[i])
                 continue;
