@@ -21,7 +21,8 @@ public class Route {
         {
             ans +=Conf.customers[i].demand;
         }
-        return ans>Conf.Cap;
+
+        return ans<Conf.Cap;
 
     }
     boolean check_t()//时间检查
@@ -33,20 +34,21 @@ public class Route {
                 return false;
             double e_time = Math.max(Conf.customers[i].r_time,Conf.dis_matriax[i][i-1]);//获得到达时间
             time += e_time + Conf.customers[i].s_time;//加上服务时间
+
         }
         return true;
 
     }
-    double getValue()
+    double getValue()//获得route的dis
     {
         this.value = 0;
-        value = Math.max(Conf.customers[this.cus_list.get(0)].r_time,Conf.dis_matriax[0][cus_list.get(0)]);//开始
-        for(int i:this.cus_list.subList(1,cus_list.size()-1))
+        value = Conf.dis_matriax[0][cus_list.get(0)];//开始
+        value = Conf.dis_matriax[0][cus_list.get(cus_list.size()-1)];
+        for(int i:this.cus_list)
         {
-            value = Math.max(Conf.customers[this.cus_list.get(i)].r_time,value+Conf.dis_matriax[i-1][i]);
-            value += Conf.customers[i].s_time;
+            if(i == cus_list.get(0))continue;
+            value += Conf.dis_matriax[i-1][i];
         }
-        value = Math.max(Conf.customers[this.cus_list.get(this.cus_list.size()-1)].r_time,value+Conf.dis_matriax[this.cus_list.get(cus_list.size()-2)][this.cus_list.get(cus_list.size()-1)]);
         return value;
     }
 }

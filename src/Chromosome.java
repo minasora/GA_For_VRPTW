@@ -10,6 +10,7 @@ import java.util.Collections;
 public class Chromosome {
     final int INF = 999999;
     ArrayList<Integer> cur_list;
+    double fitness = 0;
     Chromosome()// 构造函数，随机生成一个初始解
     {
         cur_list = new ArrayList<>();
@@ -31,8 +32,11 @@ public class Chromosome {
         double time;// 当前的时间
         for(int i = 1;i<=Conf.N;i++)//到达的点的最少花费
             V[i] = INF;
-        for(int i = 1;i<=Conf.N;i++)
+        for(int i = 1;i<=Conf.N;i++) {
+            if(this.cur_list.size()!=26)
+                System.out.println(1);
             P[i] = this.cur_list.get(i);//最开始所有点都没连上
+        }
         for(int i = 1;i<=Conf.N;i++)
         {
             cost  = 0;
@@ -74,7 +78,7 @@ public class Chromosome {
 
         }
        Route route = new Route();
-       int tmp = P[cur_list.get(Conf.N)]; // 从
+       int tmp = P[cur_list.get(Conf.N)];
        int i = Conf.N;
        while(i > 0) // 将分割过的重新组成Solution
        {
@@ -83,17 +87,30 @@ public class Chromosome {
            else
            {
                tmp = P[cur_list.get(i)];
+               Collections.reverse(route.cus_list);
                solution.rou_list.add(route);
                route = new Route();
                route.cus_list.add(cur_list.get(i));
            }
            i--;
        }
-
-
-
-
-        return solution;
+       if(route.cus_list.size()!= 0) {
+           Collections.reverse(route.cus_list);
+           solution.rou_list.add(route);
+       }
+       System.out.println(solution.getFitness());
+       return solution;
     }
-
+    Chromosome copy()//当前染色体的复制
+    {
+        Chromosome chromosome = new Chromosome();
+        chromosome.cur_list.clear();
+        chromosome.cur_list.addAll(this.cur_list);
+        chromosome.cur_list.add(0,0);
+        return chromosome;
+    }
+    void setFitness()//设置fitness
+    {
+        this.fitness = this.toSolution().getFitness();
+    }
 }

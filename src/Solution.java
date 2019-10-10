@@ -12,8 +12,11 @@ public class Solution {
     double getFitness()
     {
         this.fitness = 0;
-        for(Route route:rou_list)
-            this.fitness+=route.value;
+        for(Route route:rou_list) {
+            route.getValue();
+            this.fitness += route.value;
+
+        }
         return this.fitness;
     }
     Chromosome tochromosome()//把solution转化为chromosome
@@ -24,6 +27,24 @@ public class Solution {
             chromosome.cur_list.addAll(route.cus_list);
         }
         return chromosome;
+    }
+    void print()//输出解
+    {
+        int  i = 1;
+        for(Route route :this.rou_list)
+        {
+            System.out.print("Route "+ i + ": 0-");
+            for (int j : route.cus_list)
+            {
+
+                System.out.print(j + "-");
+            }
+            System.out.print("0");
+            System.out.print(" "+"约束符合");
+            System.out.println();
+            i++;
+        }
+        System.out.println("该解的目标函数值为" + this.getFitness());
     }
 
 }

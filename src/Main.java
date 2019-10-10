@@ -2,7 +2,7 @@ import java.io.IOException;
 
 /**
  * @author minasora
- * @date 2019/10/7 16:16
+ * @date 2019/10/7 16: 16
  * @description
  */
 public class Main {
@@ -11,8 +11,7 @@ public class Main {
     {
         System.out.println("Hello World!");
         Conf.readInstance();
-        Chromosome chromosome = new Chromosome();
-        Solution new_solution = chromosome.toSolution();
+        GA_Strategy.genetic_algoritm().toSolution().print();
 
     }
 }
