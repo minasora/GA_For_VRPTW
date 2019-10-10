@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * @description Solution类，构成了问题的一个解,提供了转到chromosome的函数
  */
 public class Solution {
-    ArrayList<Route> rou_list;
+    ArrayList<Route> rou_list = new ArrayList<>();
     double fitness; // 适应度
 
     double getFitness()

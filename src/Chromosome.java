@@ -27,11 +27,12 @@ public class Chromosome {
         int [] P = new int[Conf.N+1]; // 储存了连接该点的上一点
         int j; // 循环的标识
         int cost;// 当前的花费
+        int dist; //
         double time;// 当前的时间
         for(int i = 1;i<=Conf.N;i++)//到达的点的最少花费
             V[i] = INF;
         for(int i = 1;i<=Conf.N;i++)
-            P[i] = 0;//最开始所有点都没连上
+            P[i] = this.cur_list.get(i);//最开始所有点都没连上
         for(int i = 1;i<=Conf.N;i++)
         {
             cost  = 0;
@@ -45,15 +46,18 @@ public class Chromosome {
                     time += Conf.customers[cur_list.get(j)].s_time; // 服务时间
                     time += Conf.dis_matriax[cur_list.get(j)][0];
                     cost += Conf.customers[cur_list.get(j)].demand;
+
                 }
                 else
                 {
-                    double next_time = time - Conf.dis_matriax[cur_list.get(j-1)][0] + Conf.dis_matriax[cur_list.get(j)][cur_list.get(j-1)];
+                    double next_time = time - Conf.dis_matriax[cur_list.get(j-1)][0] + Conf.dis_matriax[cur_list.get(j)][cur_list.get(j-1)];//到达下一个的时间
+                    if(next_time > Conf.customers[cur_list.get(j)].d_time)
+                        break;//
                     time = Math.max(next_time,Conf.customers[cur_list.get(j)].r_time);
                     time += Conf.dis_matriax[cur_list.get(j)][0];
                     cost += Conf.customers[cur_list.get(j)].demand;
                 }
-                if(cost<=Conf.Cap && time <= Conf.customers[0].d_time)//假如满足容量约束和时间约束
+                if(cost<=Conf.Cap)//假如满足容量约束和时间约束
                 {
                     if(V[cur_list.get(j)] > V[cur_list.get(i-1)] + time)
                     {
@@ -69,34 +73,22 @@ public class Chromosome {
 
 
         }
-        Boolean [] if_arr = new Boolean[Conf.N];//是否访问过节点
-        Route route = new Route();
-        for(int i=1;i<=Conf.N;i++)
-        {
-
-            if(if_arr[i])
-                continue;
-            else
-                {
-                    while(true) {
-                        int tmp = P[cur_list.get(i)];
-                        if (tmp == 0)//假如上个点连接的是depot，新建route
-                        {
-                            solution.rou_list.add(route);
-                            route = new Route();
-                            break;
-                        }
-                        else // 把沿途的点设为以访问
-                        {
-                            if_arr[tmp] = true;
-                            route.cus_list.add(tmp);//加入到route中
-                        }
-
-                    }
-
-
-                }
-        }
+       Route route = new Route();
+       int tmp = P[cur_list.get(Conf.N)]; // 从
+       int i = Conf.N;
+       while(i > 0) // 将分割过的重新组成Solution
+       {
+           if(P[cur_list.get(i)] == tmp)
+               route.cus_list.add(cur_list.get(i));
+           else
+           {
+               tmp = P[cur_list.get(i)];
+               solution.rou_list.add(route);
+               route = new Route();
+               route.cus_list.add(cur_list.get(i));
+           }
+           i--;
+       }
 
 
 
