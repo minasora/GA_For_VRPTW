@@ -55,10 +55,10 @@ public class Chromosome {
                 }
                 if(cost<=Conf.Cap && time <= Conf.customers[0].d_time)//假如满足容量约束和时间约束
                 {
-                    if(V[cur_list.get(j)] > V[cur_list.get(j-1)] + time)
+                    if(V[cur_list.get(j)] > V[cur_list.get(i-1)] + time)
                     {
-                        V[cur_list.get(j)] = V[cur_list.get(j-1)] + time;//不断更新当前最短路
-                        P[cur_list.get(j)] = i;
+                        V[cur_list.get(j)] = V[cur_list.get(i-1)] + time;//不断更新当前最短路
+                        P[cur_list.get(j)] = this.cur_list.get(i-1);
                     }
                     j++;
                 }
