@@ -10,7 +10,7 @@ import java.util.zip.CheckedOutputStream;
  */
 public class GA_Strategy {
     public static double p_rate = 0.1;
-    public static int pop_number = 20;// 种群的数量
+    public static int pop_number = 100;// 种群的数量
 
     static Chromosome[] initialize()//
     {
@@ -133,7 +133,7 @@ public class GA_Strategy {
         Chromosome best = new Chromosome();
         double min = 999999;
         Chromosome[] parents = GA_Strategy.initialize();//初始化
-        for(int i=1;i<=1000;i++)
+        for(int i=1;i<= 100;i++)
         {
             Chromosome[] mid = GA_Strategy.selection(parents);//选择
             Chromosome[] childrens = new Chromosome[pop_number];//子代数组
@@ -144,10 +144,10 @@ public class GA_Strategy {
                 int sec = r.nextInt(pop_number);
                 childrens[j] = crossover(mid[fir],mid[sec]);
             }
-          //  for(int p=0;p<pop_number;p++)
-          //  {
-          //      childrens[p] = mutation(childrens[p]);
-          // }
+           for(int p=0;p<pop_number;p++)
+            {
+                childrens[p] = mutation(childrens[p]);
+           }
             for(int q = 0;q<pop_number;q++)
             {
                 parents[q] = childrens[q];

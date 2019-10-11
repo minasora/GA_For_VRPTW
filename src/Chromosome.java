@@ -106,7 +106,7 @@ public class Chromosome {
         Chromosome chromosome = new Chromosome();
         chromosome.cur_list.clear();
         chromosome.cur_list.addAll(this.cur_list);
-        chromosome.cur_list.add(0,0);
+
         return chromosome;
     }
     void setFitness()//设置fitness
