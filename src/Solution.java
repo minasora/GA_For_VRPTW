@@ -41,6 +41,7 @@ public class Solution {
             }
             System.out.print("0");
             System.out.print(" "+"约束符合");
+            System.out.print(route.value);
             System.out.println();
             i++;
         }

@@ -44,10 +44,10 @@ public class Route {
         this.value = 0;
         value = Conf.dis_matriax[0][cus_list.get(0)];//开始
         value = Conf.dis_matriax[0][cus_list.get(cus_list.size()-1)];
-        for(int i:this.cus_list)
-        {
-            if(i == cus_list.get(0))continue;
-            value += Conf.dis_matriax[i-1][i];
+        if(cus_list.size()>1) {
+            for (int i = 1; i < cus_list.size(); i++) {
+                value += Conf.dis_matriax[cus_list.get(i)][cus_list.get(i - 1)];
+            }
         }
         return value;
     }

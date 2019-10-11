@@ -12,6 +12,5 @@ public class Main {
         System.out.println("Hello World!");
         Conf.readInstance();
         GA_Strategy.genetic_algoritm().toSolution().print();
-
     }
 }
