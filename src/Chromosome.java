@@ -33,8 +33,6 @@ public class Chromosome {
         for(int i = 1;i<=Conf.N;i++)//到达的点的最少花费
             V[i] = INF;
         for(int i = 1;i<=Conf.N;i++) {
-            if(this.cur_list.size()!=26)
-                System.out.println(1);
             P[i] = this.cur_list.get(i);//最开始所有点都没连上
         }
         for(int i = 1;i<=Conf.N;i++)
@@ -98,7 +96,7 @@ public class Chromosome {
            Collections.reverse(route.cus_list);
            solution.rou_list.add(route);
        }
-       System.out.println(solution.getFitness());
+
        return solution;
     }
     Chromosome copy()//当前染色体的复制

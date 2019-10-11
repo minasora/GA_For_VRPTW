@@ -142,7 +142,7 @@ public class GA_Strategy {
         Chromosome best = new Chromosome();
         double min = 999999;
         Chromosome[] parents = GA_Strategy.initialize();//初始化
-        for(int i=1;i<= 100;i++)
+        for(int i=1;i<= 1000;i++)
         {
             Chromosome[] mid = GA_Strategy.selection(parents);//选择
             Chromosome[] childrens = new Chromosome[pop_number];//子代数组
@@ -166,7 +166,7 @@ public class GA_Strategy {
                 best = GA_Strategy.getbest(parents);
                 min = best.fitness;
             }
-            //System.out.println(get_mean(parents));
+            System.out.println(get_mean(parents));
 
         }
         return best;
