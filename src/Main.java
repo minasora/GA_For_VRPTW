@@ -9,8 +9,8 @@ public class Main {
 
     public static void main(String[] args) throws IOException
     {
-        System.out.println("Hello World!");
         Conf.readInstance();
+        System.out.println("运行中");
         GA_Strategy.genetic_algoritm().toSolution().print();
     }
 }

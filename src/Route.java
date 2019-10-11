@@ -27,23 +27,23 @@ public class Route {
     }
     boolean check_t()//时间检查
     {
-        int time = 0;
-        for(int i:this.cus_list)
+        double time = 0;
+        time += Conf.dis_matriax[0][this.cus_list.get(0)];
+        if(time>Conf.customers[cus_list.get(0)].d_time)return false;
+        for(int i=1;i<=this.cus_list.size()-1;i++)
         {
-            if(time>Conf.customers[i].d_time)
-                return false;
-            double e_time = Math.max(Conf.customers[i].r_time,Conf.dis_matriax[i][i-1]);//获得到达时间
-            time += e_time + Conf.customers[i].s_time;//加上服务时间
-
+            time = Math.max(Conf.customers[this.cus_list.get(i-1)].r_time,time+Conf.dis_matriax[this.cus_list.get(i-1)][this.cus_list.get(i)]);
+            if(time > Conf.customers[cus_list.get(i)].d_time)return  false;
         }
         return true;
+
 
     }
     double getValue()//获得route的dis
     {
         this.value = 0;
-        value = Conf.dis_matriax[0][cus_list.get(0)];//开始
-        value = Conf.dis_matriax[0][cus_list.get(cus_list.size()-1)];
+        value += Conf.dis_matriax[0][cus_list.get(0)];//开始
+        value += Conf.dis_matriax[0][cus_list.get(cus_list.size()-1)];
         if(cus_list.size()>1) {
             for (int i = 1; i < cus_list.size(); i++) {
                 value += Conf.dis_matriax[cus_list.get(i)][cus_list.get(i - 1)];

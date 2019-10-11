@@ -14,7 +14,7 @@ public class Conf {
     static Customer [] customers;//顾客
     static void readInstance() throws IOException
     {
-        File file_to_read = new File("C102.txt");
+        File file_to_read = new File("R101.txt");
         Scanner cin = new Scanner(file_to_read);
         instance_name = cin.nextLine();
         N = cin.nextInt();

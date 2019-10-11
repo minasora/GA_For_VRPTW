@@ -85,6 +85,7 @@ public class Chromosome {
            else
            {
                tmp = P[cur_list.get(i)];
+               route.getValue();
                Collections.reverse(route.cus_list);
                solution.rou_list.add(route);
                route = new Route();
@@ -94,6 +95,7 @@ public class Chromosome {
        }
        if(route.cus_list.size()!= 0) {
            Collections.reverse(route.cus_list);
+           route.getValue();
            solution.rou_list.add(route);
        }
 

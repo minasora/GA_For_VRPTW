@@ -78,7 +78,7 @@ public class GA_Strategy {
     {
         Chromosome new_chromosome = chromosome.copy();
         int iteratiion = 1;
-        while(iteratiion<1000) {
+        while(iteratiion<10000) {
             if(chromosome.fitness>neighborhood_move(new_chromosome).fitness)
             {
                 return new_chromosome;
@@ -156,7 +156,7 @@ public class GA_Strategy {
            for(int p=0;p<pop_number;p++)
             {
                 childrens[p] = mutation(childrens[p]);
-           }
+            }
             for(int q = 0;q<pop_number;q++)
             {
                 parents[q] = childrens[q];
@@ -166,7 +166,7 @@ public class GA_Strategy {
                 best = GA_Strategy.getbest(parents);
                 min = best.fitness;
             }
-            System.out.println(get_mean(parents));
+            //System.out.println(get_mean(parents));
 
         }
         return best;
