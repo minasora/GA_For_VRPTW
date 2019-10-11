@@ -128,6 +128,15 @@ public class GA_Strategy {
         }
         return chromosome;
     }
+    static double get_mean(Chromosome[] chromosomes)
+    {
+        double ans = 0;
+        for(Chromosome chromosome:chromosomes)
+        {
+            ans += chromosome.fitness;
+        }
+        return ans/pop_number;
+    }
     static Chromosome genetic_algoritm()//遗传算法主流程
     {
         Chromosome best = new Chromosome();
@@ -157,8 +166,7 @@ public class GA_Strategy {
                 best = GA_Strategy.getbest(parents);
                 min = best.fitness;
             }
-
-
+            //System.out.println(get_mean(parents));
 
         }
         return best;
