@@ -40,7 +40,7 @@ public class Solution {
                 System.out.print(j + "-");
             }
             System.out.print("0");
-            System.out.print("可行性检验："+route.check()+" ");
+            System.out.print("可行性检验："+route.check_c()+" ");
             System.out.print(route.value);
             System.out.println();
             i++;

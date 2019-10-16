@@ -22,7 +22,7 @@ public class Route {
             ans +=Conf.customers[i].demand;
         }
 
-        return ans<Conf.Cap;
+        return ans<=Conf.Cap;
 
     }
     boolean check_t()//时间检查

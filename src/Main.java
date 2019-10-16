@@ -12,5 +12,6 @@ public class Main {
         Conf.readInstance();
         System.out.println("运行中");
         GA_Strategy.genetic_algoritm().toSolution().print();
+
     }
 }

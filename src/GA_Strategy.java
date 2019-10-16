@@ -113,7 +113,7 @@ public class GA_Strategy {
         }
         return  childrens;
     }
-    static Chromosome getbest(Chromosome[] chromosomes)
+    static Chromosome get_best(Chromosome[] chromosomes)
     {
         Chromosome chromosome = null;
         double min = 99999;
@@ -137,6 +137,17 @@ public class GA_Strategy {
         }
         return ans/pop_number;
     }
+    static boolean if_repeat(Chromosome[] childrens, int i,Chromosome new_children)
+    {
+        for(int j = 0;j<i;j++)
+        {
+            if(childrens[j].fitness - new_children.fitness > 1 || childrens[j].fitness - new_children.fitness < -1)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
     static Chromosome genetic_algoritm()//遗传算法主流程
     {
         Chromosome best = new Chromosome();
@@ -144,6 +155,7 @@ public class GA_Strategy {
         Chromosome[] parents = GA_Strategy.initialize();//初始化
         for(int i=1;i<= 1000;i++)
         {
+
             Chromosome[] mid = GA_Strategy.selection(parents);//选择
             Chromosome[] childrens = new Chromosome[pop_number];//子代数组
             for(int j=0;j<pop_number;j++)
@@ -151,7 +163,19 @@ public class GA_Strategy {
                 Random r = new Random();
                 int fir = r.nextInt(pop_number);
                 int sec = r.nextInt(pop_number);
-                childrens[j] = crossover(mid[fir],mid[sec]);
+                Chromosome new_children = crossover(mid[fir],mid[sec]);
+                if(j == 0)childrens[j] = new_children;
+                else{
+                    while(true)
+                    {
+                        if(!if_repeat(childrens,j,new_children))
+                        {
+                            childrens[j] = new_children;
+                            break;
+                        }
+                        new_children = crossover(mid[fir],mid[sec]);
+                    }
+                }
             }
            for(int p=0;p<pop_number;p++)
             {
@@ -160,13 +184,14 @@ public class GA_Strategy {
             for(int q = 0;q<pop_number;q++)
             {
                 parents[q] = childrens[q];
+
             }
-            if(min>GA_Strategy.getbest(parents).fitness)
+            if(min>GA_Strategy.get_best(parents).fitness)
             {
-                best = GA_Strategy.getbest(parents);
+                best = GA_Strategy.get_best(parents);
                 min = best.fitness;
             }
-            //System.out.println(get_mean(parents));
+
 
         }
         return best;
