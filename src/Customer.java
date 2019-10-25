@@ -17,4 +17,5 @@ abstract class Customer_Strategy
     {
         return Math.sqrt((a.x-b.x)*(a.x-b.x) + (a.y-b.y)*(a.y-b.y));//返回两个顾客的欧式距离
     }
+
 }

@@ -12,6 +12,7 @@ public class Conf {
     static String instance_name;
     static double[][] dis_matriax;//距离矩阵
     static Customer [] customers;//顾客
+
     static void readInstance() throws IOException
     {
         File file_to_read = new File("C101.txt");
